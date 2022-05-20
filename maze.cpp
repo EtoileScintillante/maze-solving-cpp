@@ -4,6 +4,7 @@ Where A is the starting point and B the goal */
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <string>
 #include <utility>
 
 using namespace std;
@@ -41,4 +42,8 @@ class StackFrontier {
             return node;
         }
     }
+};
+
+class Maze {
+    //TODO
 };
