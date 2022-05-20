@@ -17,7 +17,6 @@ struct Coordinate {
 class Node {
     Coordinate state;
     Node* parent;
-    Coordinate action;
 };
 
 class StackFrontier {
