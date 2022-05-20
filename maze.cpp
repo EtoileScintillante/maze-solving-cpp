@@ -21,7 +21,7 @@ class Node {
 
 class StackFrontier {
     deque<Node> frontier;
-    StackFrontier() {frontier;}
+    StackFrontier() {}
 
     void add(Node n) {
         frontier.push_back(n);
