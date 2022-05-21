@@ -122,6 +122,22 @@ class Maze {
 
         return true;
     }
+
+    // Prints the maze
+    void print() {
+        //TODO
+    }
+
+    // Every node has 4 possible neighbor states (up, down, left  and right)
+    // This function returns a pointer to an array with neighbors
+    Coordinate* neighbors(Coordinate state) {
+        //TODO
+    }
+
+    // Try to find path from A to B
+    void solve() {
+        //TODO
+    }
 };
 
 
