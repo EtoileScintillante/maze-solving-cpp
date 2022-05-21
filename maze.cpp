@@ -2,6 +2,7 @@
 Where A is the starting point and B the goal */
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <deque>
 #include <string>
@@ -52,4 +53,19 @@ class Maze {
     bool walls[MAX_HEIGHT][MAX_WIDTH];
     Coordinate start;
     Coordinate goal;
+
+    void validate_file(string filename) {
+
+    }
 };
+
+
+int main(int argc, char* argv[]) {
+
+    // Check if correct number of arguments is provided
+    if (argc != 2) {
+        cout << "Usage: ./maze.cpp maze.txt" << endl;
+    }
+    
+    return 0;
+}
