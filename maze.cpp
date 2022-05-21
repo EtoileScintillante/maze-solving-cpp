@@ -6,7 +6,6 @@ Where A is the starting point and B the goal */
 #include <vector>
 #include <deque>
 #include <string>
-#include <utility>
 
 using namespace std;
 
@@ -27,6 +26,7 @@ public:
 class StackFrontier {
     deque<Node> frontier;
 
+    // Add node to end of frontier
     void add(Node n) {
         frontier.push_back(n);
     }
@@ -42,6 +42,7 @@ class StackFrontier {
         return false;
     }
 
+    // Remove node from end of frontier
     Node remove() {
         if (frontier.empty()) {
             throw std::underflow_error("empty frontier");
@@ -140,5 +141,6 @@ int main(int argc, char* argv[]) {
     }
     
     cout << temp[4] << endl;
+
     return 0;
 }
