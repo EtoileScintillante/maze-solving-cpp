@@ -54,7 +54,6 @@ class Maze {
     Coordinate start;
     Coordinate goal;
 
-    // File must contain an A and B
     bool validate_file(string filename) {
         ifstream file;
         file.open(filename);
@@ -63,8 +62,10 @@ class Maze {
         int charCounter = 0; // Width
         string line;
 
+        // File must contain an A and B
         while (getline(file, line)) {
             int i;
+            content.push_back(line); // Add every line to vector content
             for (i = 0; i < line.length(); i++) {
                 charCounter++;
                 if (line[i] == 'A' || line[i] == 'B') {
@@ -74,13 +75,43 @@ class Maze {
             lineCounter++;
         }
 
-        if (AB_counter == 2) {
-            height = lineCounter;
-            width = charCounter / lineCounter;
-            return true;
+        // If file does not contain A or B, return false
+        if (AB_counter != 2) {
+            return false;
         }
 
-        return false;
+        // Set height and width
+        height = lineCounter;
+        width = charCounter / lineCounter;
+
+        // Iterate over every line and store walls as bools in array
+        // True if the char is wall, else false
+        int i, j;
+        string temp;
+        for (i = 0; i < height; i++) {
+            temp = content[i];
+            for (j = 0; j < width; j++) {
+                if (content[i][j] == '#') {
+                    walls[i][j] = true;
+                }
+                else if (content[i][j] == 'A') {
+                    start = Coordinate(i, j);
+                    walls[i][j] = false;
+                }
+                else if (content[i][j] == 'B') {
+                    goal = Coordinate(i, j);
+                    walls[i][j] = false;
+                }
+                else if (content[i][j] == ' ') {
+                    walls[i][j] = false;
+                }
+                else {
+                    walls[i][j] = false;
+                }
+            }
+        }
+
+        return true;
     }
 };
 
@@ -93,11 +124,13 @@ int main(int argc, char* argv[]) {
     }
 
     ifstream file;
-    file.open(argv[1]);
+    file.open("maze1.txt");
+    vector<string> temp;
     string line;
     while (getline(file, line)) {
-        //testcode
+        temp.push_back(line);
     }
     
+    cout << temp[4] << endl;
     return 0;
 }
