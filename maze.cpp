@@ -55,7 +55,11 @@ class Maze {
     Coordinate goal;
 
     void validate_file(string filename) {
-
+        ifstream file;
+        file.open(filename);
+        int counter;
+        string fileContent;
+        //TODO
     }
 };
 
@@ -66,6 +70,6 @@ int main(int argc, char* argv[]) {
     if (argc != 2) {
         cout << "Usage: ./maze.cpp maze.txt" << endl;
     }
-    
+
     return 0;
 }
