@@ -58,8 +58,8 @@ class StackFrontier {
 class Maze {
     int width;
     int height;
-    vector<string> content;
     bool walls[MAX_HEIGHT][MAX_WIDTH];
+    bool solved;
     Coordinate start;
     Coordinate goal;
 
@@ -70,6 +70,7 @@ class Maze {
         int lineCounter = 0; // Height
         int charCounter = 0; // Width
         string line;
+        vector<string> content;
 
         // File must contain an A and B
         while (getline(file, line)) {
