@@ -89,14 +89,14 @@ int main(int argc, char* argv[]) {
 
     // Check if correct number of arguments is provided
     if (argc != 2) {
-        cout << "Usage: ./maze.cpp maze.txt" << endl;
+        cout << "Usage: ./maze maze.txt" << endl;
     }
 
     ifstream file;
-    file.open("maze1.txt");
+    file.open(argv[1]);
     string line;
     while (getline(file, line)) {
-        //test
+        //testcode
     }
     
     return 0;
