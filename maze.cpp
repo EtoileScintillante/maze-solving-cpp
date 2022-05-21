@@ -54,12 +54,33 @@ class Maze {
     Coordinate start;
     Coordinate goal;
 
-    void validate_file(string filename) {
+    // File must contain an A and B
+    bool validate_file(string filename) {
         ifstream file;
         file.open(filename);
-        int counter;
-        string fileContent;
-        //TODO
+        int AB_counter = 0;
+        int lineCounter = 0; // Height
+        int charCounter = 0; // Width
+        string line;
+
+        while (getline(file, line)) {
+            int i;
+            for (i = 0; i < line.length(); i++) {
+                charCounter++;
+                if (line[i] == 'A' || line[i] == 'B') {
+                    AB_counter++;
+                }
+            }
+            lineCounter++;
+        }
+
+        if (AB_counter == 2) {
+            height = lineCounter;
+            width = charCounter / lineCounter;
+            return true;
+        }
+
+        return false;
     }
 };
 
@@ -71,5 +92,12 @@ int main(int argc, char* argv[]) {
         cout << "Usage: ./maze.cpp maze.txt" << endl;
     }
 
+    ifstream file;
+    file.open("maze1.txt");
+    string line;
+    while (getline(file, line)) {
+        //test
+    }
+    
     return 0;
 }
