@@ -19,6 +19,7 @@ struct Coordinate {
 };
 
 class Node {
+public:
     Coordinate state;
     Node* parent;
 };
@@ -30,8 +31,15 @@ class StackFrontier {
         frontier.push_back(n);
     }
 
-    Coordinate contains_state(Coordinate state) {
-        //TODO
+    // Check if a given state already exists in the frontier
+    bool contains_state(Coordinate state) {
+        int i;
+        for (i = 0; i < frontier.size(); i++) {
+            if (frontier[i].state.x == state.x && frontier[i].state.y == state.y) {
+                return true;
+            }
+        }
+        return false;
     }
 
     Node remove() {
