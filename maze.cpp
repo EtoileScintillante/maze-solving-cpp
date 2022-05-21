@@ -9,6 +9,9 @@ Where A is the starting point and B the goal */
 
 using namespace std;
 
+const int MAX_HEIGHT = 100;
+const int MAX_WIDTH = 100;
+
 struct Coordinate {
   int x, y;
   Coordinate(int a, int b) { this->x = a; this->y = b; }
@@ -21,7 +24,6 @@ class Node {
 
 class StackFrontier {
     deque<Node> frontier;
-    StackFrontier() {}
 
     void add(Node n) {
         frontier.push_back(n);
@@ -44,5 +46,10 @@ class StackFrontier {
 };
 
 class Maze {
-    //TODO
+    int width;
+    int height;
+    vector<string> content;
+    bool walls[MAX_HEIGHT][MAX_WIDTH];
+    Coordinate start;
+    Coordinate goal;
 };
