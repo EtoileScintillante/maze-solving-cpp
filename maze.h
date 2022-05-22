@@ -93,12 +93,12 @@ public:
 
     // Check if a state is already in solution
     bool inSolution(Coordinate State) {
-    int i;
-        for (i = 0; i < solution.size(); i++) {
-            if (State == solution[i]) {
-                return true;
+        int i;
+            for (i = 0; i < solution.size(); i++) {
+                if (State == solution[i]) {
+                    return true;
+                }
             }
-        }
         return false;
     }
 
@@ -137,28 +137,38 @@ public:
     // Every node has 4 possible neighbor states (up, down, left  and right)
     // This function returns a pointer to an array with neighbors
     vector<Coordinate> neighbors(Coordinate state) {
-        vector<Coordinate> v;;
+        vector<Coordinate> v;
+        int x = state.x;
+        int y = state.y;
 
         // Up neighbor
-        Coordinate up = Coordinate(state.x - 1, state.y);
+        Coordinate up;
+        up.x = x - 1;
+        up.y = y;
         if (up.x >= 0) {
             v.push_back(up);
         }
 
         // Down neighbor
-        Coordinate down = Coordinate(state.x + 1, state.y);
+        Coordinate down;
+        down.x = x + 1;
+        down.y = y;
         if (down.x < height) {
             v.push_back(down);
         }
 
         // Left neighbor
-        Coordinate left = Coordinate(state.x, state.y - 1);
+        Coordinate left;
+        left.x = x;
+        left.y = y - 1;
         if (left.y >= 0) {
             v.push_back(left);
         }
 
         // Right neighbor
-        Coordinate right = Coordinate(state.x, state.y + 1);
+        Coordinate right;
+        right.x = x;
+        right.y = y + 1;
         if (right.y < width) {
             v.push_back(right);
         }
@@ -174,7 +184,7 @@ public:
 
         // Initialize frontier to just the starting position
         Node startPos = Node(startpos, NULL);
-        StackFrontier ST = StackFrontier();
+        StackFrontier ST;
         ST.add(startPos);
 
         // Keep looping until solution is found
@@ -190,7 +200,7 @@ public:
             num_explored++;
 
             // If node is the goal, then we have a solution
-            if (node.state.x == goal.x && node.state.y == goal.y) {
+            if (node.state == goal) {
                 solved = true;
                 while (node.parent != NULL) {
                     solution.push_back(node.state);
@@ -207,7 +217,9 @@ public:
             vector<Coordinate> n = neighbors(node.state);
             int i;
             for (i = 0; i < n.size(); i++) {
+                n[i].print();
                 if (ST.contains_state(n[i]) == false && alreadyExplored(node.state) == false) {
+                    cout << "here" << endl;
                     Node child = Node(n[i], &node);
                     ST.add(child);
                 }
