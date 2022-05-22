@@ -10,4 +10,7 @@ public:
         state = State;
         parent = Parent;
     }
+    void print() {
+        printf("State of node: (%i, %i)\n", state.x, state.y);
+    }
 };
