@@ -15,8 +15,9 @@ public:
     int height;
     int num_explored;
     bool solved;
-    Coordinate start;
+    Coordinate startpos;
     Coordinate goal;
+    vector<string> content;
     vector<Coordinate> explored;
     vector<Coordinate> solution;
     vector<vector<bool> > walls;
@@ -28,20 +29,29 @@ public:
         int lineCounter = 0; // Height
         int charCounter = 0; // Width
         string line;
-        vector<string> content;
 
         // File must contain an A and B
         while (getline(file, line)) {
-            int i;
+            int k;
             content.push_back(line); // Add every line to vector content
-            for (i = 0; i < line.length(); i++) {
+            for (k = 0; k < line.length(); k++) {
                 charCounter++;
-                if (line[i] == 'A' || line[i] == 'B') {
+                if (line[k] == 'A') {
                     AB_counter++;
+                    startpos.x = lineCounter;
+                    startpos.y = k;
+                } 
+                if (line[k] == 'B') {
+                    AB_counter++;
+                    goal.x = lineCounter;
+                    goal.y = k;
                 }
             }
             lineCounter++;
         }
+
+        goal.print();
+        startpos.print();
 
         // If file does not contain A or B, return false
         if (AB_counter != 2) {
@@ -54,29 +64,20 @@ public:
 
         // Iterate over every line and store walls as bools in array
         // True if the char is wall, else false
-        int i, j;
         string temp;
-        for (i = 0; i < walls.size(); i++) {
-            temp = content[i];
-            for (j = 0; j < walls[i].size(); j++) {
-                if (temp[j] == '#') {
-                    walls[i][j] = true;
-                }
-                else if (temp[j] == 'A') {
-                    start = Coordinate(i, j);
-                    walls[i][j] = false;
-                }
-                else if (temp[j] == 'B') {
-                    goal = Coordinate(i, j);
-                    walls[i][j] = false;
-                }
-                else if (temp[j] == ' ') {
-                    walls[i][j] = false;
+        vector<bool> v;
+        for (int a = 0; a < height; a++) {
+            temp = content[a];
+            for (int b = 0; b < width; b++) {
+                if (temp[b] == '#') {
+                    v.push_back(true);
                 }
                 else {
-                    walls[i][j] = false;
-                }
+                    v.push_back(false);
+                }  
             }
+            walls.push_back(v);
+            v.clear();
         }
 
         return true;
@@ -86,7 +87,7 @@ public:
     bool alreadyExplored(Coordinate State) {
         int i;
         for (i = 0; i < explored.size(); i++) {
-            if (State.x == explored[i].x && State.y == explored[i].y) {
+            if (State == explored[i]) {
                 return true;
             }
         }
@@ -97,37 +98,39 @@ public:
     bool inSolution(Coordinate State) {
     int i;
         for (i = 0; i < solution.size(); i++) {
-            if (State.x == solution[i].x && State.y == solution[i].y) {
+            if (State == solution[i]) {
                 return true;
             }
         }
         return false;
     }
+
     // Prints the maze
     void print() {
-        int i, j;
+        for (int a = 0; a < height; a++) {
+            for (int b = 0; b < width; b++) {
 
-        for (i = 0; i < walls.size(); i++) {
-
-            for (j = 0; j < walls[i].size(); j++) {
-
-                Coordinate temp = Coordinate(i, j);
-                if (walls[i][j] == true) {
+                if (walls[a][b] == true) {
                     cout << "█";
                 }
-                else if (temp.x == start.x && temp.y == start.y) {
+                if (walls[a][b] == false) {
+                    Coordinate temp;
+                    temp.x = a;
+                    temp.y = b;
+                    if (temp == startpos) {
                         cout << "A";
+                    }
+                    else if (temp == goal) {
+                        cout << "B";
+                    }
+                    else if (solved == true && inSolution(temp) == true) {
+                        cout << "*";
+                    }
+                    else {
+                        cout << " ";
+                    
+                    }
                 }
-                else if (temp.x == goal.x && temp.y == goal.y) {
-                    cout << "B";
-                }
-                else if (solved == true && inSolution(temp) == true) {
-                    cout << "*";
-                }
-                else {
-                    cout << " ";
-                }
-
             }
             cout << endl;
         }
@@ -173,7 +176,7 @@ public:
         num_explored = 0;
 
         // Initialize frontier to just the starting position
-        Node startPos = Node(start, NULL);
+        Node startPos = Node(startpos, NULL);
         StackFrontier frontier = StackFrontier();
         frontier.add(startPos);
 
