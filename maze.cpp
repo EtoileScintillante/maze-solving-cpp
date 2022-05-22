@@ -11,4 +11,10 @@ int main(int argc, char* argv[]) {
         cout << "Usage: ./maze maze.txt" << endl;
     }
     
+    Node n(Coordinate(2, 3), nullptr);
+    cout << n.state.x << endl;
+
+    Maze m;
+    m.validate_file("maze1.txt");
+    cout << m.walls[0][3] << endl;
 }
