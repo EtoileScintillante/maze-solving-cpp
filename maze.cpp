@@ -163,21 +163,23 @@ class Maze {
 
             for (j = 0; j < width; j++) {
 
+                Coordinate temp = Coordinate(i, j);
                 if (walls[i][j] == true) {
                     cout << "█";
                 }
-                else {
-                    Coordinate temp = Coordinate(i, j);
-                    if (temp.x == start.x && temp.y == start.y) {
+                else if (temp.x == start.x && temp.y == start.y) {
                         cout << "A";
-                    }
-                    else if (temp.x == goal.x && temp.y == goal.y) {
-                        cout << "B";
-                    }
-                    else {
-                        cout << " ";
-                    }
                 }
+                else if (temp.x == goal.x && temp.y == goal.y) {
+                    cout << "B";
+                }
+                else if (solved == true && inSolution(temp) == true) {
+                    cout << "*";
+                }
+                else {
+                    cout << " ";
+                }
+
             }
             cout << endl;
         }
@@ -241,14 +243,12 @@ class Maze {
 
             // If node is the goal, then we have a solution
             if (node.state.x == goal.x && node.state.y == goal.y) {
-
+                solved = true;
                 while (node.parent != NULL) {
                     solution.push_back(node.state);
                     Node* temp;
                     temp = node.parent;
                 }
-
-                reverse(solution.begin(), solution.end());
             }
 
             // Mark state as explored
@@ -258,8 +258,9 @@ class Maze {
             vector<Coordinate> n = neighbors(node.state);
             int i;
             for (i = 0; i < n.size(); i++) {
-                if (frontier.contains_state(n[i]) == false) {
-                    //
+                if (frontier.contains_state(n[i]) == false && alreadyExplored(node.state) == false) {
+                    Node child = Node(n[i], &node);
+                    frontier.add(child);
                 }
             }
         }
