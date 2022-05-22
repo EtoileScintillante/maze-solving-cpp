@@ -58,10 +58,12 @@ class StackFrontier {
 class Maze {
     int width;
     int height;
+    int num_explored;
     bool walls[MAX_HEIGHT][MAX_WIDTH];
     bool solved;
     Coordinate start;
     Coordinate goal;
+    vector<Coordinate> solution;
 
     bool validate_file(string filename) {
         ifstream file;
@@ -131,7 +133,7 @@ class Maze {
         for (i = 0; i < height; i++) {
 
             for (j = 0; j < width; j++) {
-                
+
                 if (walls[i][j] == true) {
                     cout << "█";
                 }
