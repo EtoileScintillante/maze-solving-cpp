@@ -15,6 +15,7 @@ int main(int argc, char* argv[]) {
     m.validate_file("maze1.txt");
     m.print();
     m.solve();
+    m.print();
 
     return 0;
 }
