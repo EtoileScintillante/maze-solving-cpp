@@ -1,14 +1,12 @@
-//#include "coordinate.h"
-//#include "node.h"
 #include <stdexcept>
-#include <deque>
-#include <stdio.h>
 
 using namespace std;
 
 class StackFrontier {
 public:
-    std::deque<Node> frontier;
+    vector<Node> frontier;
+
+    StackFrontier() {}
 
     // Add node to end of frontier
     void add(Node n) {
