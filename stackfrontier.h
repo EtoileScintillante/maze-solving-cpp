@@ -26,7 +26,7 @@ public:
 
     // Remove node from end of frontier
     Node remove() {
-        if (frontier.empty()) {
+        if (frontier.size() == 0) {
             throw std::underflow_error("empty frontier");
         }
         else {
