@@ -50,9 +50,6 @@ public:
             lineCounter++;
         }
 
-        goal.print();
-        startpos.print();
-
         // If file does not contain A or B, return false
         if (AB_counter != 2) {
             return false;
