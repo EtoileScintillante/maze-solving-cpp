@@ -126,7 +126,31 @@ class Maze {
 
     // Prints the maze
     void print() {
-        //TODO
+        int i, j;
+
+        for (i = 0; i < height; i++) {
+
+            for (j = 0; j < width; j++) {
+                
+                if (walls[i][j] == true) {
+                    cout << "█";
+                }
+                else {
+                    Coordinate temp = Coordinate(i, j);
+                    if (temp.x == start.x && temp.y == start.y) {
+                        cout << "A";
+                    }
+                    else if (temp.x == goal.x && temp.y == goal.y) {
+                        cout << "B";
+                    }
+                    else {
+                        cout << " ";
+                    }
+                }
+            }
+            cout << endl;
+        }
+        cout << endl;
     }
 
     // Every node has 4 possible neighbor states (up, down, left  and right)
