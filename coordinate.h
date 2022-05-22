@@ -6,4 +6,10 @@ public:
         x = a;
         b = y;
     }
+    bool operator == (Coordinate c) {
+        return x == c.x and y == c.y;
+    }
+    void print() {
+        printf("(%i, %i)", x, y);
+    }
 };
