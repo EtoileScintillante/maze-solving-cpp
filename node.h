@@ -1,4 +1,4 @@
-#include "coordinate.h"
+//#include "coordinate.h"
 #include <stdio.h>
 
 class Node {
