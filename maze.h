@@ -145,7 +145,7 @@ public:
         Coordinate up;
         up.x = x - 1;
         up.y = y;
-        if (up.x >= 0) {
+        if (up.x >= 0 && walls[up.x][up.y] != true) {
             v.push_back(up);
         }
 
@@ -153,7 +153,7 @@ public:
         Coordinate down;
         down.x = x + 1;
         down.y = y;
-        if (down.x < height) {
+        if (down.x < height && walls[down.x][down.y] != true) {
             v.push_back(down);
         }
 
@@ -161,7 +161,7 @@ public:
         Coordinate left;
         left.x = x;
         left.y = y - 1;
-        if (left.y >= 0) {
+        if (left.y >= 0 && walls[left.x][left.y] != true) {
             v.push_back(left);
         }
 
@@ -169,7 +169,7 @@ public:
         Coordinate right;
         right.x = x;
         right.y = y + 1;
-        if (right.y < width) {
+        if (right.y < width & walls[right.x][right.y] != true) {
             v.push_back(right);
         }
 
@@ -200,14 +200,40 @@ public:
             num_explored++;
 
             // If node is the goal, then we have a solution
-            if (node.state == goal) {
+            if (node.state == goal) {               
                 solved = true;
-                while (node.parent != NULL) {
-                    solution.push_back(node.state);
-                    Node* temp;
-                    temp = node.parent;
-                    node = *temp;
+                cout << "nodes in frontier: \n";
+                int i;
+                for (i = 0; i < ST.frontier.size(); i++) {
+                    ST.frontier[i].print();
+                    ST.frontier[i].parent->print();
                 }
+                //int i;
+                //for (i = 0; i < explored.size(); i++) {
+                    //solution.push_back(explored[i]);
+                //}
+                solution.push_back(node.state);
+                node.parent->print();
+                Node *temp = node.parent;
+                node.parent->print();
+                while (temp != NULL) {
+                    solution.push_back(temp->state);
+                    temp = temp->parent;
+                    
+                }
+                return;
+                //while (node.parent != NULL) {
+                    //solution.push_back(node.state);
+                    //node.print();
+                    //Node* temp;
+                    //temp = node.parent;
+                    //cout << "temp: " << endl;
+                    //temp->print();
+                    //node = *temp;
+                    //node = *node.parent;
+                    //node.print();
+                    //node.print();
+                //}
             }
 
             // Mark state as explored
@@ -217,9 +243,7 @@ public:
             vector<Coordinate> n = neighbors(node.state);
             int i;
             for (i = 0; i < n.size(); i++) {
-                n[i].print();
-                if (ST.contains_state(n[i]) == false && alreadyExplored(node.state) == false) {
-                    cout << "here" << endl;
+                if (ST.contains_state(n[i]) == false && alreadyExplored(n[i]) == false) {
                     Node child = Node(n[i], &node);
                     ST.add(child);
                 }
