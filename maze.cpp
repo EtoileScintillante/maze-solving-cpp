@@ -131,8 +131,34 @@ class Maze {
 
     // Every node has 4 possible neighbor states (up, down, left  and right)
     // This function returns a pointer to an array with neighbors
-    Coordinate* neighbors(Coordinate state) {
-        //TODO
+    vector<Coordinate> neighbors(Coordinate state) {
+        vector<Coordinate> v;;
+
+        // Up neighbor
+        Coordinate up = Coordinate(state.x - 1, state.y);
+        if (up.x >= 0) {
+            v.push_back(up);
+        }
+
+        // Down neighbor
+        Coordinate down = Coordinate(state.x + 1, state.y);
+        if (down.x < height) {
+            v.push_back(down);
+        }
+
+        // Left neighbor
+        Coordinate left = Coordinate(state.x, state.y - 1);
+        if (left.y >= 0) {
+            v.push_back(left);
+        }
+
+        // Right neighbor
+        Coordinate right = Coordinate(state.x, state.y + 1);
+        if (right.y < width) {
+            v.push_back(right);
+        }
+
+        return v;
     }
 
     // Try to find path from A to B
