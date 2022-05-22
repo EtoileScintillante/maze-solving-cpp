@@ -6,6 +6,7 @@ Where A is the starting point and B the goal */
 #include <vector>
 #include <deque>
 #include <string>
+#include <stdexcept>
 
 using namespace std;
 
@@ -13,17 +14,23 @@ const int MAX_HEIGHT = 100;
 const int MAX_WIDTH = 100;
 
 struct Coordinate {
+public:
   int x, y;
   Coordinate(int a, int b) { this->x = a; this->y = b; }
 };
 
 class Node {
 public:
-    Coordinate state;
+    Coordinate state = Coordinate(0,0);
     Node* parent;
+    Node(Coordinate State, Node* Parent) {
+        state = State;
+        parent = Parent;
+    }
 };
 
 class StackFrontier {
+public:
     deque<Node> frontier;
 
     // Add node to end of frontier
@@ -63,6 +70,7 @@ class Maze {
     bool solved;
     Coordinate start;
     Coordinate goal;
+    vector<Coordinate> explored;
     vector<Coordinate> solution;
 
     bool validate_file(string filename) {
@@ -126,6 +134,27 @@ class Maze {
         return true;
     }
 
+    // Check if a state is already explored
+    bool alreadyExplored(Coordinate State) {
+        int i;
+        for (i = 0; i < explored.size(); i++) {
+            if (State.x == explored[i].x && State.y == explored[i].y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Check if a state is already in solution
+    bool inSolution(Coordinate State) {
+    int i;
+        for (i = 0; i < solution.size(); i++) {
+            if (State.x == solution[i].x && State.y == solution[i].y) {
+                return true;
+            }
+        }
+        return false;
+    }
     // Prints the maze
     void print() {
         int i, j;
@@ -189,7 +218,51 @@ class Maze {
 
     // Try to find path from A to B
     void solve() {
-        //TODO
+        
+        // Keep track of number of states explored
+        num_explored = 0;
+
+        // Initialize frontier to just the starting position
+        Node startPos = Node(start, NULL);
+        StackFrontier frontier = StackFrontier();
+        frontier.add(startPos);
+
+        // Keep looping until solution is found
+        while (true) {
+            
+            // If nothing left in frontier, then no path
+            if (frontier.frontier.size() == 0) {
+                throw std::underflow_error("empty frontier");
+            }
+
+            // Nhoose a node from the frontier
+            Node node = frontier.remove();
+            num_explored++;
+
+            // If node is the goal, then we have a solution
+            if (node.state.x == goal.x && node.state.y == goal.y) {
+
+                while (node.parent != NULL) {
+                    solution.push_back(node.state);
+                    Node* temp;
+                    temp = node.parent;
+                }
+
+                reverse(solution.begin(), solution.end());
+            }
+
+            // Mark state as explored
+            explored.push_back(node.state);
+
+            // Add neighbors to frontier
+            vector<Coordinate> n = neighbors(node.state);
+            int i;
+            for (i = 0; i < n.size(); i++) {
+                if (frontier.contains_state(n[i]) == false) {
+                    //
+                }
+            }
+        }
     }
 };
 
