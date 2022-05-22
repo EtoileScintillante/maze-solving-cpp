@@ -253,6 +253,7 @@ public:
                     solution.push_back(node.state);
                     Node* temp;
                     temp = node.parent;
+                    node = *temp;
                 }
             }
 
