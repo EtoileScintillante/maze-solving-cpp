@@ -10,6 +10,6 @@ public:
         return x == c.x and y == c.y;
     }
     void print() {
-        printf("(%i, %i)", x, y);
+        printf("(%i, %i)\n", x, y);
     }
 };
