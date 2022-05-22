@@ -63,17 +63,22 @@ public:
 };
 
 class Maze {
+public:
+    string filename;
     int width;
     int height;
     int num_explored;
     bool walls[MAX_HEIGHT][MAX_WIDTH];
     bool solved;
-    Coordinate start;
-    Coordinate goal;
+    Coordinate start = Coordinate(0,0);
+    Coordinate goal = Coordinate(0,0);
     vector<Coordinate> explored;
     vector<Coordinate> solution;
+    Maze(string fileName) {
+        filename = fileName;
+    }
 
-    bool validate_file(string filename) {
+    bool validate_file() {
         ifstream file;
         file.open(filename);
         int AB_counter = 0;
@@ -275,15 +280,11 @@ int main(int argc, char* argv[]) {
         cout << "Usage: ./maze maze.txt" << endl;
     }
 
-    ifstream file;
-    file.open("maze1.txt");
-    vector<string> temp;
-    string line;
-    while (getline(file, line)) {
-        temp.push_back(line);
-    }
-    
-    cout << temp[4] << endl;
-
-    return 0;
+    string filename = argv[1];
+    Maze m = Maze("maze1.txt");
+    m.print();
+    cout << "Solving..." << endl;
+    m.solve();
+    m.print();
+    cout << "Stated explored: " << m.num_explored << endl;
 }
