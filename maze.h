@@ -174,19 +174,19 @@ public:
 
         // Initialize frontier to just the starting position
         Node startPos = Node(startpos, NULL);
-        StackFrontier frontier = StackFrontier();
-        frontier.add(startPos);
+        StackFrontier ST = StackFrontier();
+        ST.add(startPos);
 
         // Keep looping until solution is found
         while (true) {
             
             // If nothing left in frontier, then no path
-            if (frontier.frontier.size() == 0) {
+            if (ST.frontier.size() == 0) {
                 throw std::underflow_error("empty frontier");
             }
 
             // Nhoose a node from the frontier
-            Node node = frontier.remove();
+            Node node = ST.remove();
             num_explored++;
 
             // If node is the goal, then we have a solution
@@ -207,9 +207,9 @@ public:
             vector<Coordinate> n = neighbors(node.state);
             int i;
             for (i = 0; i < n.size(); i++) {
-                if (frontier.contains_state(n[i]) == false && alreadyExplored(node.state) == false) {
+                if (ST.contains_state(n[i]) == false && alreadyExplored(node.state) == false) {
                     Node child = Node(n[i], &node);
-                    frontier.add(child);
+                    ST.add(child);
                 }
             }
         }
