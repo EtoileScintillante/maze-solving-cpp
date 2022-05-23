@@ -4,12 +4,12 @@ using namespace std;
 
 class StackFrontier {
 public:
-    vector<Node> frontier;
+    vector<Node*> frontier;
 
     StackFrontier() {}
 
     // Add node to end of frontier
-    void add(Node n) {
+    void add(Node* n) {
         frontier.__emplace_back(n);
     }
 
@@ -17,7 +17,7 @@ public:
     bool contains_state(Coordinate state) {
         int i;
         for (i = 0; i < frontier.size(); i++) {
-            if (frontier[i].state == state) {
+            if (frontier[i]->state == state) {
                 return true;
             }
         }
@@ -25,14 +25,19 @@ public:
     }
 
     // Remove node from end of frontier
-    Node remove() {
+    Node* remove() {
         if (frontier.size() == 0) {
             throw std::underflow_error("empty frontier");
         }
         else {
-            Node node = frontier.back();
+            Node* node = frontier.back();
             frontier.pop_back();
             return node;
         }
+    }
+    
+    // Free memory
+    void free_frontier() {
+        //TODO
     }
 };
