@@ -17,7 +17,7 @@ public:
     bool contains_state(Coordinate state) {
         int i;
         for (i = 0; i < frontier.size(); i++) {
-            if (frontier[i].state.x == state.x && frontier[i].state.y == state.y) {
+            if (frontier[i].state == state) {
                 return true;
             }
         }
