@@ -10,7 +10,7 @@ public:
 
     // Add node to end of frontier
     void add(Node n) {
-        frontier.emplace_back(n);
+        frontier.__emplace_back(n);
     }
 
     // Check if a given state already exists in the frontier
