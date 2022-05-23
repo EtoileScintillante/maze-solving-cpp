@@ -183,9 +183,10 @@ public:
         num_explored = 0;
 
         // Initialize frontier to just the starting position
-        Node startPos = Node(startpos, NULL);
+        Node* startPos = new Node(startpos, NULL);
         StackFrontier ST;
         ST.add(startPos);
+        cout << "Size of frontier before while loop: " << ST.frontier.size() << endl;
 
         // Keep looping until solution is found
         while (true) {
@@ -196,58 +197,41 @@ public:
             }
 
             // Nhoose a node from the frontier
-            Node node = ST.remove();
+            Node* node = ST.remove();
             num_explored++;
 
             // If node is the goal, then we have a solution
-            if (node.state == goal) {               
+            if (node->state == goal) {               
                 solved = true;
-                cout << "nodes in frontier: \n";
-                int i;
-                for (i = 0; i < ST.frontier.size(); i++) {
-                    ST.frontier[i].print();
-                    ST.frontier[i].parent->print();
-                }
                 //int i;
                 //for (i = 0; i < explored.size(); i++) {
                     //solution.push_back(explored[i]);
                 //}
-                solution.push_back(node.state);
-                node.parent->print();
-                Node *temp = node.parent;
-                node.parent->print();
+                solution.push_back(node->state);
+                //node.parent->print();
+                Node *temp = node->parent;
+                //node.parent->print();
                 while (temp != NULL) {
                     solution.push_back(temp->state);
                     temp = temp->parent;
                     
                 }
                 return;
-                //while (node.parent != NULL) {
-                    //solution.push_back(node.state);
-                    //node.print();
-                    //Node* temp;
-                    //temp = node.parent;
-                    //cout << "temp: " << endl;
-                    //temp->print();
-                    //node = *temp;
-                    //node = *node.parent;
-                    //node.print();
-                    //node.print();
-                //}
             }
 
             // Mark state as explored
-            explored.push_back(node.state);
+            explored.push_back(node->state);
 
             // Add neighbors to frontier
-            vector<Coordinate> n = neighbors(node.state);
+            vector<Coordinate> n = neighbors(node->state);
             int i;
             for (i = 0; i < n.size(); i++) {
                 if (ST.contains_state(n[i]) == false && alreadyExplored(n[i]) == false) {
-                    Node child = Node(n[i], &node);
+                    Node* child = new Node(n[i], node);
                     ST.add(child);
                 }
             }
+            cout << "Size during while loop " << ST.frontier.size() << endl;
         }
     }
 };
