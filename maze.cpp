@@ -12,10 +12,12 @@ int main(int argc, char* argv[]) {
     }
 
     Maze m;
-    m.validate_file("maze1.txt");
+    m.validate_file(argv[1]);
     m.print();
+    cout << "Solving..." << endl;
     m.solve();
     m.print();
+    cout << "States explored: " << m.num_explored << endl;
 
     return 0;
 }
