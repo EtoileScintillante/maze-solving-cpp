@@ -38,6 +38,9 @@ public:
     
     // Free memory
     void free_frontier() {
-        //TODO
+        int i;
+        for (i = 0; i < frontier.size(); i++) {
+            delete frontier[i];
+        }
     }
 };
