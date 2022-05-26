@@ -215,7 +215,6 @@ public:
                     temp = temp->parent;
                     
                 }
-                ST.free_frontier();
                 return;
             }
 
