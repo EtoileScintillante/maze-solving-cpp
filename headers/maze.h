@@ -215,6 +215,7 @@ public:
                     temp = temp->parent;
                     
                 }
+                ST.deleteFrontier();
                 return;
             }
 
