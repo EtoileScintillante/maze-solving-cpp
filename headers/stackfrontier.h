@@ -35,12 +35,4 @@ public:
             return node;
         }
     }
-    
-    // Free memory
-    void free_frontier() {
-        int i;
-        for (i = 0; i < frontier.size(); i++) {
-            delete frontier[i];
-        }
-    }
 };
