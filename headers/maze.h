@@ -216,6 +216,7 @@ public:
                     
                 }
                 ST.deleteFrontier();
+                ST.frontier.clear();
                 return;
             }
 
