@@ -35,14 +35,12 @@ public:
             return node;
         }
     }
-    
+
     // Free allocated memory
     void deleteFrontier() {
 
         for (int i = 0; i < frontier.size(); i++) {
             delete frontier[i];
         }
-
-        frontier.clear();
     }
 };
