@@ -2,7 +2,7 @@
 
 class StackFrontier {
 public:
-    vector<Node*> frontier;
+    std::vector<Node*> frontier;
 
     StackFrontier() {}
 
