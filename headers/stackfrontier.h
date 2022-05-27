@@ -1,7 +1,5 @@
 #include <stdexcept>
 
-using namespace std;
-
 class StackFrontier {
 public:
     vector<Node*> frontier;

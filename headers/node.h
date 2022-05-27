@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 class Node {
 public:
     Node() {state = Coordinate(); parent = NULL;}
