@@ -9,7 +9,7 @@ public:
 
     // Add node to end of frontier
     void add(std::shared_ptr<Node> n) {
-        frontier.__emplace_back(std::move(n));
+        frontier.emplace_back(std::move(n));
     }
 
     // Check if a given state already exists in the frontier
