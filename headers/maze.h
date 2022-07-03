@@ -206,8 +206,7 @@ public:
             num_explored++;
 
             // If node is the goal, then we have a solution
-            if (node->state == goal) {   
-                cout << ST.frontier.size() << endl;            
+            if (node->state == goal) {              
                 solved = true;
                 solution.push_back(node->state);
                 shared_ptr<Node> temp = node->parent;
