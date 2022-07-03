@@ -189,9 +189,9 @@ public:
         num_explored = 0;
 
         // Initialize frontier to just the starting position
-        Node* startPos = new Node(startpos, NULL);
+        shared_ptr<Node> startPos(new Node(startpos, NULL));
         StackFrontier ST;
-        ST.add(startPos);
+        ST.add(move(startPos));
 
         // Keep looping until solution is found
         while (true) {
@@ -202,21 +202,20 @@ public:
             }
 
             // Nhoose a node from the frontier
-            Node* node = ST.remove();
+            shared_ptr<Node> node = ST.remove();
             num_explored++;
 
             // If node is the goal, then we have a solution
-            if (node->state == goal) {               
+            if (node->state == goal) {   
+                cout << ST.frontier.size() << endl;            
                 solved = true;
                 solution.push_back(node->state);
-                Node *temp = node->parent;
+                shared_ptr<Node> temp = node->parent;
                 while (temp != NULL) {
                     solution.push_back(temp->state);
                     temp = temp->parent;
                     
                 }
-                ST.deleteFrontier();
-                ST.frontier.clear();
                 return;
             }
 
@@ -228,7 +227,7 @@ public:
             int i;
             for (i = 0; i < n.size(); i++) {
                 if (ST.contains_state(n[i]) == false && alreadyExplored(n[i]) == false) {
-                    Node* child = new Node(n[i], node);
+                    shared_ptr<Node> child(new Node(n[i], node));
                     ST.add(child);
                 }
             }

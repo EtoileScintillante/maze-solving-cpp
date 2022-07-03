@@ -1,14 +1,15 @@
 #include <stdexcept>
+#include <memory>
 
 class StackFrontier {
 public:
-    std::vector<Node*> frontier;
+    std::vector<std::shared_ptr<Node> > frontier;
 
     StackFrontier() {}
 
     // Add node to end of frontier
-    void add(Node* n) {
-        frontier.__emplace_back(n);
+    void add(std::shared_ptr<Node> n) {
+        frontier.__emplace_back(std::move(n));
     }
 
     // Check if a given state already exists in the frontier
@@ -23,22 +24,14 @@ public:
     }
 
     // Remove node from end of frontier
-    Node* remove() {
+    std::shared_ptr<Node> remove() {
         if (frontier.size() == 0) {
             throw std::underflow_error("empty frontier");
         }
         else {
-            Node* node = frontier.back();
+            std::shared_ptr<Node> node = frontier.back();
             frontier.pop_back();
             return node;
-        }
-    }
-
-    // Free allocated memory
-    void deleteFrontier() {
-
-        for (int i = 0; i < frontier.size(); i++) {
-            delete frontier[i];
         }
     }
 };
