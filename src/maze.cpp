@@ -172,7 +172,8 @@ void Maze::solve()
     {
         // If nothing left in frontier, then no path
         if (ST.frontier.size() == 0) {
-            throw std::underflow_error("empty frontier");
+            std::cout << "No path found" << std::endl;
+            return;
         }
 
         // Pop a node from the frontier
