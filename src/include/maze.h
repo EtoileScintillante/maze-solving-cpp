@@ -9,8 +9,6 @@
  * ' ' = path
  * 'A' = starting point
  * 'B' = goal
- * 
- * See directory mazes for examples.
  */
 
 #ifndef __MAZE__
