@@ -14,29 +14,29 @@ A  ███   ██  ████████  █
 ████████     ████  ██  █
 ██    ████         ██  █
 ██  ████     ████  ██  █
-██                 ██  █
+██                     █
 █████  ███████   ████  █
-█████  ███████   ████  █
-██       ██      ████  █
+█████  ███████   ███████
+██       ██            █
 ████████████████████████
 
 Solving...
 
 ████████████████████████
-█ *******██ ***********█
-A**███  *██ *████████ *█
-██████  *██ *      ██ *█
-█       *****████  ██ *B
-████████     ████  ██  █
-██    ████         ██  █
-██  ████     ████  ██  █
-██                 ██  █
+█ *******██            █
+A**███  *██  ████████  █
+██████  *██        ██  █
+█       *****████  ██**B
+████████    *████  ██* █
+██    ████  *******██**█
+██  ████     ████ *██ *█
+██                *****█
 █████  ███████   ████  █
-█████  ███████   ████  █
-██       ██      ████  █
+█████  ███████   ███████
+██       ██            █
 ████████████████████████
 
-States explored: 134
+States explored: 48
 ```
 ## Compile
 ```
@@ -63,4 +63,4 @@ Once the analyzing is done, the program tries to find a path from A to B using [
 
 The program exits the loop when it reaches the goal or when the frontier is empty (in which case there is no path found).
 
-One thing to note though is that this way of solving, using DFS, is not very fast. 
+One thing to note though is that this way of solving, using DFS, is not very fast nor does it guarantee the shortest path. 
