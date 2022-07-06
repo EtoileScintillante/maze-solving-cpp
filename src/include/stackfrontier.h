@@ -25,7 +25,12 @@ public:
     /// Checks if a given state already exists in the frontier.
     bool contains_state(Coordinate state);
 
-    /// Removes node from end of frontier.
+    /**
+     * @brief Removes node from end of frontier.
+     * 
+     * @return std::shared_ptr<Node> 
+     * @throws std::underflow_error thrown if frontier is empty.
+     */
     std::shared_ptr<Node> remove();
 };
 
