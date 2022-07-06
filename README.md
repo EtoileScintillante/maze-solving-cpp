@@ -1,4 +1,4 @@
-# C++ Maze Solving
+# Maze Solving
 
 ## About
 Inspired by [one](https://www.youtube.com/watch?v=qzhEB8FxxRs) of the lectures from the online course [CS50AI](https://cs50.harvard.edu/ai/2020/). The professor showed a python program to solve mazes (txt based) and I wanted to recreate that same program in c++. 
