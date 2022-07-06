@@ -19,13 +19,13 @@ public:
 
     StackFrontier();
 
-    // Add node to end of frontier
+    /// Adds node to end of frontier.
     void add(std::shared_ptr<Node> n);
 
-    // Check if a given state already exists in the frontier
+    /// Checks if a given state already exists in the frontier.
     bool contains_state(Coordinate state);
 
-    // Remove node from end of frontier
+    /// Removes node from end of frontier.
     std::shared_ptr<Node> remove();
 };
 

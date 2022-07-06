@@ -25,13 +25,19 @@ public:
     Maze();
     int num_explored; // Explored states counter
 
-    // Check if txt file is valid (it must contain an A and B)
+    /**
+     * @brief Checks if a given txt file is valid.
+     * A txt file with a maze must contain an A (starting point) and a B (goal).
+     * 
+     * @param filename path to txt file.
+     * @return true if valid, false otherwise.
+     */
     bool validate_file(std::string filename);
 
-    // Prints the maze
+    /// Prints the maze.
     void print();
 
-    // Try to find path from A to B
+    /// Tries to find a path from A to B using depth-first search.
     void solve();
 private:
     int width;
@@ -44,14 +50,13 @@ private:
     std::vector<Coordinate> solution; // Contains the states that lead us from A to B
     std::vector<std::vector<bool> > walls; // true if wall, false otherwise
 
-    // Check if a state is already explored
+    /// Checks if a state is already explored.
     bool alreadyExplored(Coordinate State);
 
-    // Check if a state is already in solution
+    /// Checks if a state is already in solution.
     bool inSolution(Coordinate State);
     
-    // Every node has a state which has 4 possible neighbor states (up, down, left and right)
-    // This function returns a vector containing the neighbor states
+    /// Returns a vector containing the neighbor states of a given state.
     std::vector<Coordinate> neighbors(Coordinate state);
 };
 
