@@ -24,6 +24,15 @@ class Maze {
 public:
     Maze();
     int num_explored; // Explored states counter
+
+    // Check if txt file is valid (it must contain an A and B)
+    bool validate_file(std::string filename);
+
+    // Prints the maze
+    void print();
+
+    // Try to find path from A to B
+    void solve();
 private:
     int width;
     int height;
@@ -34,25 +43,16 @@ private:
     std::vector<Coordinate> explored; // Contains all the explored states
     std::vector<Coordinate> solution; // Contains the states that lead us from A to B
     std::vector<std::vector<bool> > walls; // true if wall, false otherwise
-public:
-    // Check if txt file is valid (it must contain an A and B)
-    bool validate_file(std::string filename);
-private:
+
     // Check if a state is already explored
     bool alreadyExplored(Coordinate State);
 
     // Check if a state is already in solution
     bool inSolution(Coordinate State);
-public:
-    // Prints the maze
-    void print();
-private:
+    
     // Every node has a state which has 4 possible neighbor states (up, down, left and right)
     // This function returns a vector containing the neighbor states
     std::vector<Coordinate> neighbors(Coordinate state);
-public:
-    // Try to find path from A to B
-    void solve();
 };
 
 #endif /*__MAZE__*/
