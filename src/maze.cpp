@@ -175,7 +175,7 @@ void Maze::solve()
             throw std::underflow_error("empty frontier");
         }
 
-        // Choose a node from the frontier
+        // Pop a node from the frontier
         std::shared_ptr<Node> node = ST.remove();
         num_explored++;
 
