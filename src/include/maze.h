@@ -47,8 +47,8 @@ public:
     // Prints the maze
     void print();
 private:
-    // Every node has a state and every state has 4 possible neighbor states (up, down, left and right)
-    // This function returns a vector containing the neighbors of a state
+    // Every node has a state and 4 possible neighbor states (up, down, left and right)
+    // This function returns a vector containing the neighbor states
     std::vector<Coordinate> neighbors(Coordinate state);
 public:
     // Try to find path from A to B
