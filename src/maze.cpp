@@ -190,18 +190,18 @@ void Maze::solve(bool LIFO)
             }
         }
 
-        // Pop a node from the frontier
+        // Pop a node from the frontier and increment explored counter
         std::shared_ptr<Node> node;
         if (LIFO == true) {
-            std::shared_ptr<Node> node = ST.remove();
+            node = ST.remove();
         }
         else {
-            std::shared_ptr<Node> node = QT.remove();
+            node = QT.remove();
         }
         num_explored++;
 
         // If node is the goal, then we have a solution
-        if (node->state == goal) {              
+        if (node->state == goal) {           
             solved = true;
             solution.push_back(node->state);
             std::shared_ptr<Node> temp = node->parent;
@@ -212,7 +212,7 @@ void Maze::solve(bool LIFO)
             }
             return;
         }
-
+        
         // Mark state as explored
         explored.push_back(node->state);
 
