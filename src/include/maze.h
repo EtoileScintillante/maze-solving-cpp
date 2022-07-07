@@ -37,8 +37,12 @@ public:
     /// Prints the maze.
     void print();
 
-    /// Tries to find a path from A to B using depth-first search.
-    void solve();
+    /**
+     * @brief Tries to find a path from A to B.
+     * 
+     * @param LIFO true if LIFO is used (stack), false if FIFO is used (queue).
+     */
+    void solve(bool LIFO);
 private:
     int width;
     int height;

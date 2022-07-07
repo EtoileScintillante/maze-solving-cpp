@@ -157,7 +157,7 @@ std::vector<Coordinate> Maze::neighbors(Coordinate state)
     return v;
 }
 
-void Maze::solve()
+void Maze::solve(bool LIFO)
 {
     // Keep track of number of states explored
     num_explored = 0;
@@ -165,19 +165,39 @@ void Maze::solve()
     // Initialize frontier to just the starting position
     std::shared_ptr<Node> startPos(new Node(startpos, NULL));
     StackFrontier ST;
-    ST.add(move(startPos));
+    QueueFrontier QT;
+    if (LIFO == true) {
+        ST.add(move(startPos));
+    }
+    else {
+        QT.add(move(startPos));
+    }
 
     // Keep looping until solution is found
     while (true)
     {
         // If nothing left in frontier, then no path
-        if (ST.frontier.size() == 0) {
-            std::cout << "No path found" << std::endl;
-            return;
+        if (LIFO == true) {
+            if (ST.frontier.size() == 0) {
+                std::cout << "No path found" << std::endl;
+                return;
+            }
+        }
+        else {
+            if (QT.frontier.size() == 0) {
+                std::cout << "No path found" << std::endl;
+                return;
+            }
         }
 
         // Pop a node from the frontier
-        std::shared_ptr<Node> node = ST.remove();
+        std::shared_ptr<Node> node;
+        if (LIFO == true) {
+            std::shared_ptr<Node> node = ST.remove();
+        }
+        else {
+            std::shared_ptr<Node> node = QT.remove();
+        }
         num_explored++;
 
         // If node is the goal, then we have a solution
@@ -201,9 +221,17 @@ void Maze::solve()
         int i;
         for (i = 0; i < n.size(); i++) 
         {
-            if (ST.contains_state(n[i]) == false && alreadyExplored(n[i]) == false) {
-                std::shared_ptr<Node> child(new Node(n[i], node));
-                ST.add(child);
+            if (LIFO == true) {
+                if (ST.contains_state(n[i]) == false && alreadyExplored(n[i]) == false) {
+                    std::shared_ptr<Node> child(new Node(n[i], node));
+                    ST.add(child);
+                }
+            }
+            else {
+                if (QT.contains_state(n[i]) == false && alreadyExplored(n[i]) == false) {
+                    std::shared_ptr<Node> child(new Node(n[i], node));
+                    QT.add(child);
+                }
             }
         }
     }
