@@ -6,6 +6,6 @@ add_executable(maze-solver
   src/coordinate.cpp
   src/maze.cpp
   src/node.cpp
-  src/stackfrontier.cpp
+  src/frontiers.cpp
 )
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
