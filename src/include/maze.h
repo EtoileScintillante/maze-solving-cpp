@@ -15,7 +15,7 @@
 #define __MAZE__
 
 #include <vector>
-#include "stackfrontier.h"
+#include "frontiers.h"
 #include <fstream>
 #include <string.h>
 #include <iostream>
