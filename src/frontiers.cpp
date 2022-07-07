@@ -1,4 +1,4 @@
-#include "stackfrontier.h"
+#include "frontiers.h"
 
 StackFrontier::StackFrontier() {};
 
@@ -26,6 +26,18 @@ std::shared_ptr<Node> StackFrontier::remove()
     else {
         std::shared_ptr<Node> node = frontier.back();
         frontier.pop_back();
+        return node;
+    }
+}
+
+std::shared_ptr<Node> QueueFrontier::remove() 
+{
+    if (frontier.size() == 0) {
+        throw std::underflow_error("empty frontier");
+    }
+    else {
+        std::shared_ptr<Node> node = frontier.front();
+        frontier.erase(frontier.begin());
         return node;
     }
 }
